@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Org.h" />
+		<Unit filename="Study_ES" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
