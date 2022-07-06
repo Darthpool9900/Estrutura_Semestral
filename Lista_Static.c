@@ -19,7 +19,7 @@ int List_Insert_Static(int Valor){//Função utilizada para inserir valores dent
     }else{
         for(aux=0;aux<cont;aux++){
             if(lista[aux]==Valor){//Verifica se o valor já foi inserido
-                printf("\nElemento não inserido pois elemento %d já está na lista",lista[aux]);
+                printf("\nElemento não inserido pois elemento %d já está na list",lista[aux]);
                 return;
             }
         }
