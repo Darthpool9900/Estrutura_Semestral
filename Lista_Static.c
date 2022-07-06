@@ -2,13 +2,14 @@
 #include<stdlib.h>
 #include<locale.h>
 #define TAM 3
-int lista[TAM], cont =0;
+int lista[TAM], cont =0,aux_org;
 
 int List_Insert_Static(int Valor){//Função utilizada para inserir valores dentro de uma lista que utiliza vetores
-    int aux,aux_org[TAM];
+    int aux;
 
     if(cont==TAM){//Verifica se está vázio
         printf("\nLista cheia");
+        return;
     }else{
         for(aux=0;aux<cont;aux++){
             if(lista[aux]==Valor){//Verifica se o valor já foi inserido
@@ -16,26 +17,35 @@ int List_Insert_Static(int Valor){//Função utilizada para inserir valores dent
                 return;
             }
         }
+        
     }
-        lista[cont] = Valor;
-
-        /*if(cont>0){//Organiza os valores por ordem de grandeza
-                if(lista[cont-1]>lista[cont]){
-                    aux_org[cont] = lista[cont];
-                    lista[cont] = lista[cont-1];
-                    lista[cont-1] = aux_org[cont];
-                    printf("\n=======================================================");
-                    printf("\n|| Elemento %d inserido e re-alocado para posição %d ||",lista[cont],cont);
-                    printf("\n=======================================================");
-                    cont++;
-                }
-            }else{
+        if(cont>=0){//Organiza os valores por ordem de grandeza
+        int menor = cont -1;
+                if(lista[menor]>Valor){
+                    lista[cont] = lista[menor];
+                    lista[menor] = Valor;
+                    printf("\n=========================================================");
+                    printf("\n|| Elemento %d inserido e %d re-alocado para posição %d ||",lista[menor],lista[cont],cont);
+                    printf("\n=========================================================");
+                    
+                    
+                }else if(lista[menor]<Valor){
+                    lista[cont] = Valor;
                     printf("\n=======================================================");
                     printf("\n|| Elemento %d inserido e alocado para posição %d ||",lista[cont],cont);
                     printf("\n=======================================================");
-                    cont++;
+                   
+            }else{
+                lista[cont] = Valor;
+                    printf("\n=======================================================");
+                    printf("\n|| Elemento %d inserido e alocado para posição %d ||",lista[cont],cont);
+                    printf("\n=======================================================");
+                   
             }
-*/cont++;
+        }
+            
+
+                           cont++;
 
 }
 
