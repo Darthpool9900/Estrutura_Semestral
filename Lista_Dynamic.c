@@ -64,25 +64,20 @@ void imprimir(Lista *lista) {
     printf("\n\n");
 }
 
-/*void search_dynamic(int valor,struct lista *p){//Busca número dentro da lista
-    struct lista *aux;
-    aux = p;
-    if(aux==NULL){
-        printf("\nLista vazia");
-    }else{
-        while(aux!=NULL && aux->dado!=valor){//Busca o número dentro da lista
-            aux = aux->prox;
-            if(aux->dado==valor){
-                printf("\nAchei:%d",aux->dado);
-                return;
-            }else{
-                printf("\nNúmero não encontrado");
-                return;
-            }
-        }
-    }
-}*/
 
+/*
+      Função para buscar um elemento na lista
+*/
+void buscar(Lista *lista, int num){
+    No *aux, *no = NULL;
+
+    aux = lista->inicio;
+    while(aux && aux->valor != num)
+        aux = aux->proximo;
+    if(aux)
+        no = aux;
+        printf("%d",aux->valor);
+}
 
 int main(){
    setlocale(LC_ALL, "Portuguese");
@@ -107,7 +102,8 @@ int main(){
             scanf("%d",&a);
             remover(create,a);
         }else if(case_resp==3){
-            
+            scanf("%d",&a);
+            buscar(a,create);
         }else if(case_resp==4){
             imprimir(create);
         }else if(case_resp==5){
