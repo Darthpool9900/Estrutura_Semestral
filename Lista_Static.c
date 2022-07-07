@@ -25,23 +25,23 @@ int List_Insert_Static(int Valor){//Função utilizada para inserir valores dent
             }
         }
                 lista[cont] = Valor;
-                
+
                     printf("\n=======================================================");
                     printf("\n||   Elemento %d inserido e alocado para posição %d  ||",lista[cont],cont);
                     printf("\n=======================================================");
                     cont++;
-        
+
     }
-            
-        
-    Org_Val(); 
+
+
+    Org_Val();
 }
 
 void Org_Val(){//Rotina para organizar Valores em Ordem numémrica
     for (int j = 1; j < cont; ++j) {
       int x = lista[j];
       int i;
-      for (i = j-1; i >= 0 && lista[i] > x; --i) 
+      for (i = j-1; i >= 0 && lista[i] > x; --i)
          lista[i+1] = lista[i];
          lista[i+1] = x;
    }
@@ -103,12 +103,13 @@ int main(){
     int a, case_resp,loop;
     do{
     printf("-------------------------\n");
-    printf("-          1-Inserir    -\n");
-    printf("-          2-Remover    -\n");
-    printf("-          3-Buscar     -\n");
-    printf("-          4-Listar     -\n");
-    printf("-          5-sair       -\n");
+    printf("1 - Inserir um valor\n");
+    printf("2 - Remover um valor\n");
+    printf("3 - Buscar um valor\n");
+    printf("4 - Listar\n");
+    printf("5 - Sair\n");
     printf("-------------------------\n");
+    printf("Operação: ");
     scanf("%d",&case_resp);
 
         if(case_resp==1){
