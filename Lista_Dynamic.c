@@ -2,38 +2,69 @@
 #include<stdlib.h>
 #include<locale.h>
 
-struct lista{
-    int dado;
-    struct lista *prox;
-};
+typedef struct No {
+    int valor;
+    struct No *proximo;
+} No;
+typedef struct {
+    No *inicio, *fim;
+    int tam;
+} Lista;
 
-    struct lista *create;
+/// inserção no início da lista
+void inserirInicio(Lista *lista, int valor) {
+    No *novo = (No*)malloc(sizeof(No)); // cria um novo nó
+    novo->valor = valor;// (*novo).valor = valor
 
-void insert_dynamic(int Valor,struct lista *p){//Insere Valor dentro da lista
-    struct lista *aux;
-    aux = (struct lista *)malloc(sizeof(struct lista));
-    aux -> dado = Valor;
-    aux -> prox = p -> prox;
-    
-    p -> prox = aux;
+    if(lista->inicio == NULL) { // a lista está vazia
+        novo->proximo = NULL;
+        lista->inicio = novo;
+        lista->fim = novo;
+    } else { // a lista não está vazia
+        novo->proximo = lista->inicio;
+        lista->inicio = novo;
+    }
+    lista->tam++;
+}
+// remover um elemento da lista
+void remover(Lista *lista, int valor) {
+    No *inicio = lista->inicio; // ponteiro para o início da lista
+    No * noARemover = NULL; // ponteiro para o nó a ser removido
 
-    printf("\nInserido:%d",p->dado);
+    if(inicio != NULL && lista->inicio->valor == valor) { // remover 1º elemento
+        noARemover = lista->inicio;
+        lista->inicio = noARemover->proximo;
+        if(lista->inicio == NULL)
+            lista->fim = NULL;
+    } else { // remoção no meio ou no final
+        while(inicio != NULL && inicio->proximo != NULL && inicio->proximo->valor != valor) {
+            inicio = inicio->proximo;
+        }
+        if(inicio != NULL && inicio->proximo != NULL) {
+            noARemover = inicio->proximo;
+            inicio->proximo = noARemover->proximo;
+            if(inicio->proximo == NULL) // se o último elemento for removido
+                lista->fim = inicio;
+        }
+    }
+    if(noARemover) {
+        free(noARemover); // libera a memória do nó
+        lista->tam--; // decrementa o tamanho da lista
+    }
 }
 
-void remove_dynamic(struct lista *p,int Valor){//Busca e remove elemento da lista
-    struct lista *aux,*aux_2;
-    aux = p;
-    aux_2 = p-> prox;
-    while(aux_2!=NULL&&aux_2->dado!=Valor){//Verifica se a próxima posição é vazia
-        aux = aux_2;
+// imprimir a lista
+void imprimir(Lista *lista) {
+    No *inicio = lista->inicio;
+    printf("Tamanho da lista: %d\n", lista->tam);
+    while(inicio != NULL) {
+        printf("%d ", inicio->valor);
+        inicio = inicio->proximo;
     }
-    if(aux_2 != NULL){//Verifica e realoca os elementos de posição
-        aux->prox=aux_2->prox;
-        free(aux_2);
-    }
+    printf("\n\n");
 }
 
-void search_dynamic(int valor,struct lista *p){//Busca número dentro da lista
+/*void search_dynamic(int valor,struct lista *p){//Busca número dentro da lista
     struct lista *aux;
     aux = p;
     if(aux==NULL){
@@ -50,17 +81,12 @@ void search_dynamic(int valor,struct lista *p){//Busca número dentro da lista
             }
         }
     }
-}
+}*/
 
-void printf_dynamic(struct lista *p){//Imprime lista inteira
-struct lista *aux;
-    for(aux = p-> prox;aux!=NULL;aux = aux->prox){
-        printf("\nNúmero:%d",aux->dado);
-    }
-}
 
 int main(){
    setlocale(LC_ALL, "Portuguese");
+   struct Lista *create;
     int a, case_resp,loop;
     do{
     printf("-------------------------\n");
@@ -75,17 +101,15 @@ int main(){
         if(case_resp==1){
             printf("Digite um valor:");
             scanf("%d",&a);
-            insert_dynamic(a,create);
+            inserirInicio(create,a);
         }else if(case_resp==2){
             printf("Digite um valor:");
             scanf("%d",&a);
-            remove_dynamic(create,a);
+            remover(create,a);
         }else if(case_resp==3){
-            printf("Digite um valor:");
-            scanf("%d",&a);
-            search_dynamic(create,a);
+            
         }else if(case_resp==4){
-            printf_dynamic(create);
+            imprimir(create);
         }else if(case_resp==5){
             return 0;
         }
