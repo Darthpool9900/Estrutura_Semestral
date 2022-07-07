@@ -12,6 +12,7 @@ int lista[TAM], cont =0,aux_org;
 
 int List_Insert_Static(int Valor){//Função utilizada para inserir valores dentro de uma lista que utiliza vetores
     int aux;
+    int menor = cont -1;
 
     if(cont==TAM){//Verifica se está vázio
         printf("\nLista cheia");
@@ -19,40 +20,31 @@ int List_Insert_Static(int Valor){//Função utilizada para inserir valores dent
     }else{
         for(aux=0;aux<cont;aux++){
             if(lista[aux]==Valor){//Verifica se o valor já foi inserido
-                printf("\nElemento não inserido pois elemento %d já está na list",lista[aux]);
+                printf("\nElemento não inserido pois elemento %d já está na lista",lista[aux]);
                 return;
             }
         }
+                lista[cont] = Valor;
+                
+                    printf("\n=======================================================");
+                    printf("\n||   Elemento %d inserido e alocado para posição %d  ||",lista[cont],cont);
+                    printf("\n=======================================================");
+                    cont++;
         
     }
-        if(cont>=0){//Organiza os valores por ordem de grandeza
-        int menor = cont -1;
-                if(lista[menor]>Valor){
-                    lista[cont] = lista[menor];
-                    lista[menor] = Valor;
-                    printf("\n=========================================================");
-                    printf("\n|| Elemento %d inserido e %d re-alocado para posição %d ||",lista[menor],lista[cont],cont);
-                    printf("\n=========================================================");
-                    
-                    
-                }else if(lista[menor]<Valor){
-                    lista[cont] = Valor;
-                    printf("\n=======================================================");
-                    printf("\n|| Elemento %d inserido e alocado para posição %d ||",lista[cont],cont);
-                    printf("\n=======================================================");
-                   
-            }else{
-                lista[cont] = Valor;
-                    printf("\n=======================================================");
-                    printf("\n|| Elemento %d inserido e alocado para posição %d ||",lista[cont],cont);
-                    printf("\n=======================================================");
-                   
-            }
-        }
             
+        
+    Org_Val(); 
+}
 
-                           cont++;
-
+void Org_Val(){//Rotina para organizar Valores em Ordem numémrica
+    for (int j = 1; j < cont; ++j) {
+      int x = lista[j];
+      int i;
+      for (i = j-1; i >= 0 && lista[i] > x; --i) 
+         lista[i+1] = lista[i];
+         lista[i+1] = x;
+   }
 }
 
 void Remove_Static(int valor){//Remove valor selelcionado de um fila que utiliza vetores
