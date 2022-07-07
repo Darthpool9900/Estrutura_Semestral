@@ -14,16 +14,20 @@ typedef struct {
 /// inserção no início da lista
 void inserirInicio(Lista *lista, int valor) {
     No *novo = (No*)malloc(sizeof(No)); // cria um novo nó
-    novo->valor = valor;// (*novo).valor = valor
-
+   
+    if(novo->valor == valor){
+            printf("Repetido");
+    }else{
+         novo->valor = valor;// (*novo).valor = valor
     if(lista->inicio == NULL) { // a lista está vazia
         novo->proximo = NULL;
-        lista->inicio = novo;
-        lista->fim = novo;
-    } else { // a lista não está vazia
+            lista->inicio = novo;
+            lista->fim = novo;
+        }else { // a lista não está vazia
         novo->proximo = lista->inicio;
         lista->inicio = novo;
     }
+    } 
     lista->tam++;
 }
 // remover um elemento da lista
@@ -68,16 +72,23 @@ void imprimir(Lista *lista) {
 /*
       Função para buscar um elemento na lista
 */
-void buscar(Lista *lista, int num){
-    No *aux, *no = NULL;
-
-    aux = lista->inicio;
-    while(aux && aux->valor != num)
-        aux = aux->proximo;
-    if(aux)
-        no = aux;
-        printf("%d",aux->valor);
+buscar(No *p,int valor){
+    if(p == NULL){
+        printf("\nVazio");
+    }else{
+        do{
+            if(p->valor==valor){
+                printf("\n%d",p->valor);
+                return;
+            }else{
+                p = p->proximo;
+            }
+        }while(p != NULL);
+    }
+    return;
 }
+
+
 
 int main(){
    setlocale(LC_ALL, "Portuguese");
@@ -103,7 +114,7 @@ int main(){
             remover(create,a);
         }else if(case_resp==3){
             scanf("%d",&a);
-            buscar(a,create);
+            buscar(create,a);
         }else if(case_resp==4){
             imprimir(create);
         }else if(case_resp==5){
