@@ -11,24 +11,30 @@ typedef struct {
     int tam;
 } Lista;
 
+int cont = 0;
+
 /// inserção no início da lista
 void inserirInicio(Lista *lista, int valor) {
     No *novo = (No*)malloc(sizeof(No)); // cria um novo nó
-   
-    if(novo->valor == valor){
-            printf("Repetido");
-    }else{
          novo->valor = valor;// (*novo).valor = valor
-    if(lista->inicio == NULL) { // a lista está vazia
-        novo->proximo = NULL;
-            lista->inicio = novo;
-            lista->fim = novo;
+        if(lista->inicio == NULL) { // a lista está vazia
+            novo->proximo = NULL;
+                lista->inicio = novo;
+                lista->fim = novo;
         }else { // a lista não está vazia
+        while(lista!= NULL){//Confere se os números são repetidos;
+            if(lista->fim==valor){
+                printf("\nRepetido");
+                return;
+            }else{
+                lista = lista->fim;
+            }
         novo->proximo = lista->inicio;
         lista->inicio = novo;
     }
-    } 
     lista->tam++;
+    cont++;
+}
 }
 // remover um elemento da lista
 void remover(Lista *lista, int valor) {
@@ -50,11 +56,13 @@ void remover(Lista *lista, int valor) {
             if(inicio->proximo == NULL) // se o último elemento for removido
                 lista->fim = inicio;
         }
+        
     }
     if(noARemover) {
         free(noARemover); // libera a memória do nó
         lista->tam--; // decrementa o tamanho da lista
     }
+    cont--;
 }
 
 // imprimir a lista
@@ -73,17 +81,16 @@ void imprimir(Lista *lista) {
       Função para buscar um elemento na lista
 */
 buscar(No *p,int valor){
-    if(p == NULL){
-        printf("\nVazio");
+    if(p ->valor== NULL){
+        printf("\nLista vazio");
     }else{
         do{
             if(p->valor==valor){
                 printf("\n%d",p->valor);
                 return;
-            }else{
-                p = p->proximo;
             }
-        }while(p != NULL);
+                p = p->proximo;
+        }while(p!= NULL);
     }
     return;
 }
@@ -95,6 +102,7 @@ int main(){
    struct Lista *create;
     int a, case_resp,loop;
     do{
+        printf("\n%d",cont);
     printf("-------------------------\n");
     printf("-          1-Inserir    -\n");
     printf("-          2-Remover    -\n");
