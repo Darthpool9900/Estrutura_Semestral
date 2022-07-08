@@ -1,3 +1,10 @@
+//Trabalho 1º Bimestre - Listas Sequenciais e Dinâmicas
+//Estrutura de Dados I - Prof. Albino Szesz Jr.
+//Rafael Zachesky de Oliveira RA: 21010026
+//Reinaldo Calixto Junior RA: 21010226
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
