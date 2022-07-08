@@ -22,19 +22,18 @@ void inserirInicio(Lista *lista, int valor) {
                 lista->inicio = novo;
                 lista->fim = novo;
         }else { // a lista não está vazia
-        while(lista!= NULL){//Confere se os números são repetidos;
-            if(lista->fim==valor){
+        novo->proximo = lista->inicio;
+        do{//Confere se os números são repetidos;
+            if(lista->inicio==valor){
                 printf("\nRepetido");
                 return;
-            }else{
-                lista = lista->fim;
             }
-        novo->proximo = lista->inicio;
+            lista= lista->fim;
+            }while(lista!= NULL);
         lista->inicio = novo;
     }
     lista->tam++;
     cont++;
-}
 }
 // remover um elemento da lista
 void remover(Lista *lista, int valor) {
