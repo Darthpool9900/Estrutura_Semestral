@@ -14,27 +14,19 @@ typedef struct {
 int cont = 0;
 
 /// inserção no início da lista
-void inserirInicio(Lista *lista, int valor) {
-    No *novo = (No*)malloc(sizeof(No)); // cria um novo nó
-         novo->valor = valor;// (*novo).valor = valor
-        if(lista->inicio == NULL) { // a lista está vazia
-            novo->proximo = NULL;
-                lista->inicio = novo;
-                lista->fim = novo;
-        }else { // a lista não está vazia
-        novo->proximo = lista->inicio;
-        do{//Confere se os números são repetidos;
-            if(lista->inicio==valor){
-                printf("\nRepetido");
-                return;
-            }
-            lista= lista->fim;
-            }while(lista!= NULL);
-        lista->inicio = novo;
-    }
-    lista->tam++;
-    cont++;
+void inserirInicio(No **lista, double valor)
+{
+   for (    ; *lista; lista = &(*lista)->proximo) {
+    if((*lista)->valor == valor) return;
+   }
+   *lista = malloc(sizeof **lista);
+   (*lista)->valor = valor;
+   (*lista)->proximo = NULL;
 }
+
+
+
+
 // remover um elemento da lista
 void remover(Lista *lista, int valor) {
     No *inicio = lista->inicio; // ponteiro para o início da lista
@@ -55,7 +47,7 @@ void remover(Lista *lista, int valor) {
             if(inicio->proximo == NULL) // se o último elemento for removido
                 lista->fim = inicio;
         }
-        
+
     }
     if(noARemover) {
         free(noARemover); // libera a memória do nó
